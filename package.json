@@ -1,0 +1,38 @@
+{
+  "name": "dapp-payments-web3",
+  "version": "1.0.0",
+  "description": "Dapp Ethereum to allow people send and manage requests of payment",
+  "keywords": [
+    "web3",
+    "metamask",
+    "ethereum",
+    "html"
+  ],
+  "license": "MIT",
+  "main": "src/index.tsx",
+  "dependencies": {
+    "@web3-react/core": "6.1.9",
+    "ethers": "5.7.1",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
+    "react-router-dom": "6.4.2",
+    "react-scripts": "4.0.3"
+  },
+  "devDependencies": {
+    "@types/react": "17.0.20",
+    "@types/react-dom": "^18.0.6",
+    "typescript": "4.4.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
