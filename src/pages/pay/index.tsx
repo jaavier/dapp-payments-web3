@@ -92,15 +92,17 @@ export default function Pay() {
             <span>{amountWithFee} ETH</span>
           </div>
         </div>
-        <div className="mt-4">
-          <CustomButton
-            text={`PAY NOW ${amountWithFee} ETH`}
-            onClick={payNow}
-          />
-          <span className="text-xs ml-2">
-            Balance: {user.balance.toString().slice(0, 10)} ETH
-          </span>
-        </div>
+        {!status && (
+          <div className="mt-4">
+            <CustomButton
+              text={`PAY NOW ${amountWithFee} ETH`}
+              onClick={payNow}
+            />
+            <span className="text-xs ml-2">
+              Balance: {user.balance.toString().slice(0, 10)} ETH
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );
