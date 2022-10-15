@@ -1,10 +1,29 @@
 import { MetamaskProvider } from "./metamask/context";
-import HelloMetamask from "./components/HelloMetamask";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/home";
+import Received from "./pages/received";
+import Sent from "./pages/sent";
+import Error from "./pages/error";
+import Create from "./pages/create";
+import Container from "./components/Container";
+
 
 export default function App() {
   return (
-    <MetamaskProvider>
-      <HelloMetamask />
-    </MetamaskProvider>
-  );
+		<MetamaskProvider>
+			<Container>
+				<BrowserRouter>
+					<Routes>
+						<Route path="/" element={<Home />}>
+							<Route index element={<Home />} />
+						</Route>
+						<Route path="received" element={<Received />} />
+						<Route path="sent" element={<Sent />} />
+						<Route path="create" element={<Create />} />
+						<Route path="*" element={<Error />} />
+					</Routes>
+				</BrowserRouter>
+			</Container>
+		</MetamaskProvider>
+	);
 }
