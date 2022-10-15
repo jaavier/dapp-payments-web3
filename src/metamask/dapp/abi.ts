@@ -92,6 +92,11 @@ const abi: Record<string, any>[] = [
         type: "address",
       },
       {
+        internalType: "address payable",
+        name: "payer",
+        type: "address",
+      },
+      {
         internalType: "uint256",
         name: "amount",
         type: "uint256",
@@ -136,6 +141,11 @@ const abi: Record<string, any>[] = [
         type: "address",
       },
       {
+        internalType: "address payable",
+        name: "payer",
+        type: "address",
+      },
+      {
         internalType: "uint256",
         name: "amount",
         type: "uint256",
@@ -168,6 +178,11 @@ const abi: Record<string, any>[] = [
           {
             internalType: "address payable",
             name: "receiver",
+            type: "address",
+          },
+          {
+            internalType: "address payable",
+            name: "payer",
             type: "address",
           },
           {
@@ -208,6 +223,11 @@ const abi: Record<string, any>[] = [
           {
             internalType: "address payable",
             name: "receiver",
+            type: "address",
+          },
+          {
+            internalType: "address payable",
+            name: "payer",
             type: "address",
           },
           {

@@ -6,8 +6,7 @@ import Create from "./pages/create";
 import Container from "./components/Container";
 import Pay from "./pages/pay";
 import AllToPay from "./pages/pay/AllToPay";
-import { ConnectMetamask } from "./metamask";
-import { useEffect } from "react";
+import AllSent from "./pages/sent/AllSent";
 
 const Parent = () => {
   return (
@@ -24,13 +23,17 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Parent />}>
-              <Route path="sent" element={<Sent />} />
+              <Route path="sent" element={<Parent />}>
+                <Route index element={<AllSent />} />
+                <Route path=":paymentId" element={<Sent />} />
+              </Route>
               <Route path="create" element={<Create />} />
               <Route path="pay" element={<Parent />}>
                 <Route index element={<AllToPay />} />
                 <Route path=":paymentId" element={<Pay />} />
               </Route>
             </Route>
+            <Route path="create" element={<Create />} />
             <Route path="*" element={<Error />} />
           </Routes>
         </BrowserRouter>

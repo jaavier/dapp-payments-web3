@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMetamask } from "../../metamask";
 import CustomButton from "../../components/CustomButton";
 import { utils } from "ethers";
@@ -12,17 +12,19 @@ const iface: utils.Interface = new utils.Interface(dapp.abi);
 export default function Pay() {
   const { paymentId } = useParams();
   const { user, contract } = useMetamask();
+  const navigate = useNavigate();
   const [payment, setPayment] = useState<Payment>({});
+  console.log("🚀 ~ file: index.tsx ~ line 16 ~ Pay ~ payment", payment);
   const loadPayment = async () => {
     try {
       const response = await contract.toPay();
       if (response.length)
         setPayment({
-          description: response[parseInt(paymentId)][0],
-          receiver: response[parseInt(paymentId)][1],
-          amount: response[parseInt(paymentId)][2],
-          amountWithFee: response[parseInt(paymentId)][3],
-          status: response[parseInt(paymentId)][4],
+          description: response[parseInt(paymentId)].description,
+          receiver: response[parseInt(paymentId)].receiver,
+          amount: response[parseInt(paymentId)].amount,
+          amountWithFee: response[parseInt(paymentId)].amountWithFee,
+          status: response[parseInt(paymentId)].status,
         });
     } catch (e) {
       console.log("Error loading payment", e);
@@ -77,15 +79,16 @@ export default function Pay() {
           <div className="my-5 flex flex-col items-center gap-2">
             <CustomButton
               text={`PAY NOW ${amountWithFee} ETH`}
-              onClick={() =>
-                payNow({
+              onClick={async () => {
+                await payNow({
                   payment: {
                     ...payment,
                     paymentId,
                   },
                   address: user.address,
-                })
-              }
+                });
+                navigate("/pay");
+              }}
             />
             <span className="text-xs">
               Balance: {user.balance.toString().slice(0, 10)} ETH
