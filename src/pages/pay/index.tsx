@@ -1,19 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useMetamask } from "../../metamask";
 import CustomButton from "../../components/CustomButton";
 import { utils } from "ethers";
 import dapp from "../../metamask/dapp";
+import Badge from "../../components/Badge";
 
-type Payment = {
-  description?: string;
-  receiver?: string;
-  amount?: number;
-  amountWithFee?: any;
-  status?: boolean;
-};
-
-let iface: utils.Interface = new utils.Interface(dapp.abi);
+const iface: utils.Interface = new utils.Interface(dapp.abi);
 
 export default function Pay() {
   const { paymentId } = useParams();
@@ -59,12 +52,10 @@ export default function Pay() {
     return () => clearInterval(timer);
   }, []);
 
-  if (!payment.amount) return <p>Cargando...</p>;
+  if (!payment.amount) return <p>Request #{paymentId} not found</p>;
 
   const amount = utils.formatEther(payment.amount.toString());
   const amountWithFee = utils.formatEther(payment.amountWithFee.toString());
-  const colorStatus = payment.status ? "green" : "yellow";
-  const status = payment.status ? "completed" : "pending";
 
   return (
     <div className="">
@@ -72,11 +63,7 @@ export default function Pay() {
         <div className="uppercase">
           Pay Request <span className="underline">#{paymentId}</span>
         </div>
-        <div
-          className={`bg-${colorStatus}-500 text-white font-extralight py-1 px-2 rounded-md text-xs w-fit tracking-widest`}
-        >
-          <div>{status}</div>
-        </div>
+        <Badge status={payment.status} />
       </div>
       <div>
         <div className="font-light tracking-wide my-2">
@@ -112,6 +99,9 @@ export default function Pay() {
             </span>
           </div>
         )}
+      </div>
+      <div className="flex justify-center">
+        <Link to="/pay">Go back</Link>
       </div>
     </div>
   );
