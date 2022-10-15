@@ -15,10 +15,6 @@ export default function Sent() {
   const loadPayment = async () => {
     try {
       const response = await contract.toGetPaid();
-      console.log(
-        "🚀 ~ file: index.tsx ~ line 18 ~ loadPayment ~ response",
-        response
-      );
       if (response.length)
         setPayment({
           description: response[parseInt(paymentId)].description,
