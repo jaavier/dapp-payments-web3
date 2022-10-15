@@ -34,4 +34,4 @@ Are you running this project? Create your first payment request! **[Create Reque
 
 1. Route **/received** to see with detail requests of payment received.
 2. Route **/sent** to see payment requests sent
-3. Route **/pay** to complete a request of payment using Metamask
+3. Navbar or similar to navigate between /sent, /pay and /pay/:paymentId
