@@ -7,15 +7,7 @@ import payNow from "./payNow";
 
 export default function AllToPay() {
   const { user, contract } = useMetamask();
-  const [requests, setRequests] = useState<Payment[]>([
-    {
-      description: "AllToPay",
-      amount: 1,
-      receiver: "0x1",
-      amountWithFee: 1.5,
-      status: false,
-    },
-  ]);
+  const [requests, setRequests] = useState<Payment[]>([]);
 
   const loadList = async () => {
     try {
@@ -38,7 +30,7 @@ export default function AllToPay() {
   if (!window.ethereum) return <DetectMetamask />;
 
   return (
-    <div>
+    <div className="h-96">
       <Outlet />
       <div className="text-center text-lg mb-5 font-light tracking-widest">
         <div className="uppercase">Requests Received</div>

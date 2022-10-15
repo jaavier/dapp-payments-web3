@@ -7,6 +7,7 @@ import Container from "./components/Container";
 import Pay from "./pages/pay";
 import AllToPay from "./pages/pay/AllToPay";
 import AllSent from "./pages/sent/AllSent";
+import Navbar from "./components/Navbar";
 
 const Parent = () => {
   return (
@@ -21,21 +22,24 @@ export default function App() {
     <MetamaskProvider>
       <Container>
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Parent />}>
-              <Route path="sent" element={<Parent />}>
-                <Route index element={<AllSent />} />
-                <Route path=":paymentId" element={<Sent />} />
+          <Navbar />
+          <div className="shadow-lg border border-slate-300 bg-white p-10 rounded-md w-4/6 h-fit">
+            <Routes>
+              <Route path="/" element={<Parent />}>
+                <Route path="sent" element={<Parent />}>
+                  <Route index element={<AllSent />} />
+                  <Route path=":paymentId" element={<Sent />} />
+                </Route>
+                <Route path="create" element={<Create />} />
+                <Route path="pay" element={<Parent />}>
+                  <Route index element={<AllToPay />} />
+                  <Route path=":paymentId" element={<Pay />} />
+                </Route>
               </Route>
               <Route path="create" element={<Create />} />
-              <Route path="pay" element={<Parent />}>
-                <Route index element={<AllToPay />} />
-                <Route path=":paymentId" element={<Pay />} />
-              </Route>
-            </Route>
-            <Route path="create" element={<Create />} />
-            <Route path="*" element={<Error />} />
-          </Routes>
+              <Route path="*" element={<Error />} />
+            </Routes>
+          </div>
         </BrowserRouter>
       </Container>
     </MetamaskProvider>
