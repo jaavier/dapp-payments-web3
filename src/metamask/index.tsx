@@ -1,6 +1,6 @@
 import ConnectMetamask from "./components/ConnectMetamask";
 import DetectMetamask from "./components/DetectMetamask";
-import { loadSmartContract, provider } from "./helpers/loadSmartContract";
+import { contract, provider } from "./helpers/loadSmartContract";
 import requestAccounts from "./helpers/requestAccounts";
 import getBalance from "./helpers/getBalance";
 import changeNetwork from "./helpers/changeNetwork";
@@ -15,6 +15,6 @@ export {
   requestAccounts,
   getBalance,
   changeNetwork,
-  loadSmartContract,
+  contract,
   provider,
 };

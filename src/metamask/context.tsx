@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { contract as Contract } from "./helpers/loadSmartContract";
 import requestAccounts from "./helpers/requestAccounts";
 
 type Values = {
@@ -22,7 +23,7 @@ const initialValues: Values = {
 const MetamaskContext = React.createContext<Values>(initialValues);
 
 const MetamaskProvider = ({ children }: any) => {
-  const [contract, setContract] = React.useState<any>();
+  const [contract, setContract] = React.useState<any>(Contract);
   const [user, setUser] = React.useState<User>({
     address: window.ethereum.selectedAddress,
     isConnected: false,
@@ -37,7 +38,12 @@ const MetamaskProvider = ({ children }: any) => {
       });
     }
   };
-  const values: Values = { user, setUser, contract, setContract };
+  const values: Values = {
+    user,
+    setUser,
+    contract,
+    setContract,
+  };
 
   if (window.ethereum)
     window.ethereum.on("accountsChanged", async (accounts: any) => {
