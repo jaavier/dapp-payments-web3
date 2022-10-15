@@ -1,35 +1,23 @@
 import { useEffect, useState } from "react";
-<<<<<<< Updated upstream
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMetamask } from "../../metamask";
-
-export default function Sent() {
-  const { contract } = useMetamask();
-  const [payments, setPayments] = useState<any[]>([]);
-  const loadToGetPaid = async () => {
-    try {
-      const response = await contract.toGetPaid();
-      setPayments(response);
-=======
-import { useNavigate, useParams } from "react-router-dom";
-import { useMetamask } from "../../metamask";
+import CustomButton from "../../components/CustomButton";
 import { utils } from "ethers";
 import dapp from "../../metamask/dapp";
 import Badge from "../../components/Badge";
+import payNow from "./payNow";
 
 const iface: utils.Interface = new utils.Interface(dapp.abi);
 
-export default function Sent() {
+export default function Pay() {
   const { paymentId } = useParams();
-  const { contract } = useMetamask();
-  const [payment, setPayment] = useState<Payment>({});
+  const { user, contract } = useMetamask();
   const navigate = useNavigate();
+  const [payment, setPayment] = useState<Payment>({});
+  console.log("🚀 ~ file: index.tsx ~ line 16 ~ Pay ~ payment", payment);
   const loadPayment = async () => {
     try {
-      const response = await contract.toGetPaid();
-      console.log(
-        "🚀 ~ file: index.tsx ~ line 18 ~ loadPayment ~ response",
-        response
-      );
+      const response = await contract.toPay();
       if (response.length)
         setPayment({
           description: response[parseInt(paymentId)].description,
@@ -37,21 +25,13 @@ export default function Sent() {
           amount: response[parseInt(paymentId)].amount,
           amountWithFee: response[parseInt(paymentId)].amountWithFee,
           status: response[parseInt(paymentId)].status,
-          payer: response[parseInt(paymentId)].payer,
         });
->>>>>>> Stashed changes
     } catch (e) {
       console.log("Error loading payment", e);
     }
   };
 
   useEffect(() => {
-<<<<<<< Updated upstream
-    loadToGetPaid();
-  }, []);
-
-  return <div>Requests sent {payments.length}</div>;
-=======
     loadPayment();
     const timer = window.setInterval(() => {
       loadPayment();
@@ -78,8 +58,8 @@ export default function Sent() {
           <div className="px-1 py-2">{payment.description}</div>
         </div>
         <div className="font-light tracking-wide my-2">
-          <div className="text-sm font-semibold">Payer</div>
-          <div className="px-1 py-2 text-sm">{payment.payer}</div>
+          <div className="text-sm font-semibold">Receiver</div>
+          <div className="px-1 py-2 text-sm">{payment.receiver}</div>
         </div>
         <div className="font-light tracking-wide items-center my-2">
           <div className="flex gap-5 items-center">
@@ -95,17 +75,30 @@ export default function Sent() {
             <span>{amountWithFee} ETH</span>
           </div>
         </div>
+        {!payment.status && (
+          <div className="my-5 flex flex-col items-center gap-2">
+            <CustomButton
+              text={`PAY NOW ${amountWithFee} ETH`}
+              onClick={async () => {
+                await payNow({
+                  payment: {
+                    ...payment,
+                    paymentId,
+                  },
+                  address: user.address,
+                });
+                navigate("/pay");
+              }}
+            />
+            <span className="text-xs">
+              Balance: {user.balance.toString().slice(0, 10)} ETH
+            </span>
+          </div>
+        )}
       </div>
       <div className="flex justify-center mt-5">
-        <button
-          onClick={() => {
-            navigate(-1);
-          }}
-        >
-          Go back
-        </button>
+        <Link to="/pay">Go back</Link>
       </div>
     </div>
   );
->>>>>>> Stashed changes
 }
