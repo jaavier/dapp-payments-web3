@@ -45,7 +45,7 @@ export default function Pay() {
   const amountWithFee = utils.formatEther(payment.amountWithFee.toString());
 
   return (
-    <div className="">
+    <div className="h-96">
       <div className="text-center text-lg mb-4 font-light tracking-wide flex justify-center flex-col items-center gap-1">
         <div className="uppercase">
           Pay Request <span className="underline">#{paymentId}</span>

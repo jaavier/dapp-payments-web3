@@ -23,7 +23,7 @@ export default function App() {
       <Container>
         <BrowserRouter>
           <Navbar />
-          <div className="shadow-lg border border-slate-300 bg-white p-10 rounded-md w-4/6 h-auto">
+          <div className="shadow-lg border border-slate-300 bg-white p-10 rounded-md w-4/6 h-fit">
             <Routes>
               <Route path="/" element={<Parent />}>
                 <Route path="sent" element={<Parent />}>

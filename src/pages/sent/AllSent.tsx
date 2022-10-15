@@ -1,6 +1,6 @@
 import { utils } from "ethers";
-import { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import Badge from "../../components/Badge";
 import { ConnectMetamask, DetectMetamask, useMetamask } from "../../metamask";
 
@@ -37,8 +37,7 @@ export default function AllSent() {
   if (!window.ethereum) return <DetectMetamask />;
 
   return (
-    <div>
-      <Outlet />
+    <div className="h-96">
       <div className="text-center text-lg mb-5 font-light tracking-widest">
         <div className="uppercase">Requests Sent</div>
       </div>
