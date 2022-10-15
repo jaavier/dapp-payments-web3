@@ -1,72 +1,24 @@
 # Dapp: Payments Web3
 This is a project based on [boilerplate-react-metamask](https://github.com/jaavier/boilerplate-react-metamask/), a project that help us to connect React with Metamask
 
-# How to use?
+- By default this project will be connected to Sepolia testnet.
+- Feel free to try this dApp and create a request of payment to this wallet 0xd823Ff0182d87666e8e1eDFb4287Fd99FbDaD8C8 for an amount of 0.0012 ETH. 
 
-Wrap your **App** in `<MetamaskProvider></MetamaskProvider>`
+📣⚠️ This dApp works just in Testnet Sepolia! 📣⚠️
 
-**App.jsx**
+****
 
-```
-import { MetamaskProvider } from ". /metamask";
-import HelloMetamask from "./components/HelloMetamask";
+I'll be attent :) 
 
-export default function App() {
-  return (
-    <MetamaskProvider>
-      <HelloMetamask />
-    </MetamaskProvider>
-  );
-}
-```
+# Create Request
 
-# Connecting to Metamask
+Are you running this project? Create your first payment request! **[Create Request](https://localhost:3000/create)**
 
-Use the component `<ConnectMetamask />` to request access to use Metamask
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/990085/195962374-53fe6025-29da-4a3c-bd4e-95d263df564a.png">
 
-```
-import React from "react";
-import { useMetamask, ConnectMetamask } from "../metamask";
 
-export default function MyWallet(props: any) {
-  const { user } = useMetamask();
+# Under construction
 
-  if (!user.isConnected) return <ConnectMetamask />
-
-  return <div>My wallet is: {user.address}</div>;
-}
-```
-
-# Connect a React Component to a Smart Contract in simple steps 🚀
-
-- `loadSmartContract(address, abi)` to get a handler for your Smart Contract
-- `contract` is the object with methods and variables from your Smart Contract
-
-```
-import { useMetamask, ConnectMetamask, loadSmartContract } from "../metamask";
-import dapp from "../metamask/dapp";
-
-export default function HelloMetamask() {
-  const { user, contract, setContract } = useMetamask();
-  const setSmartContract = () => {
-    const smartContract = loadSmartContract(dapp.address, dapp.abi);
-    setContract(smartContract);
-  };
-
-  useEffect(() => {
-    setSmartContract();
-  }, []);
-
-  return <div>My first dapp!</div>
-}
-```
-
-You are ready! 🚀🚀
-
-# Ask for permissions to connect
-
-<img width="1440" alt="image" src="https://user-images.githubusercontent.com/990085/195737168-747e7f87-b20c-49c7-b68a-346117eba184.png">
-
-# After connection
-
-<img width="1440" alt="image" src="https://user-images.githubusercontent.com/990085/195737336-3688d32f-2059-4187-8f17-ecfb1269ee71.png">
+1. Route **/received** to see with detail requests of payment received.
+2. Route **/sent** to see payment requests sent
+3. Route **/pay** to complete a request of payment using Metamask
