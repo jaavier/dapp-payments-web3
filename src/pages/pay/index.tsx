@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMetamask } from "../../metamask";
 import CustomButton from "../../components/CustomButton";
-import { BigNumber, utils } from "ethers";
+import { utils } from "ethers";
+import dapp from "../../metamask/dapp";
 
 type Payment = {
   description?: string;
@@ -12,6 +13,8 @@ type Payment = {
   status?: boolean;
 };
 
+let iface: utils.Interface = new utils.Interface(dapp.abi);
+
 export default function Pay() {
   const { paymentId } = useParams();
   const { user, contract } = useMetamask();
@@ -19,13 +22,14 @@ export default function Pay() {
   const loadPayment = async () => {
     try {
       const response = await contract.toPay();
-      setPayment({
-        description: response[parseInt(paymentId)][0],
-        receiver: response[parseInt(paymentId)][1],
-        amount: response[parseInt(paymentId)][2],
-        amountWithFee: response[parseInt(paymentId)][3],
-        status: response[parseInt(paymentId)][4],
-      });
+      if (response.length)
+        setPayment({
+          description: response[parseInt(paymentId)][0],
+          receiver: response[parseInt(paymentId)][1],
+          amount: response[parseInt(paymentId)][2],
+          amountWithFee: response[parseInt(paymentId)][3],
+          status: response[parseInt(paymentId)][4],
+        });
     } catch (e) {
       console.log("Error loading payment", e);
     }
@@ -33,10 +37,11 @@ export default function Pay() {
   const payNow = async () => {
     const tx = {
       from: user.address,
-      to: payment.receiver,
+      to: dapp.address,
       value: payment.amountWithFee._hex,
-      gas: "46587", //todo cambiar a 21000,
+      gas: "99999", //todo cambiar a 21000,
       chainId: `0x${Number(11155111).toString(16)}`,
+      data: iface.encodeFunctionData("pay", [parseInt(paymentId)]),
     };
     await window.ethereum
       .request({ method: "eth_sendTransaction", params: [tx] })
@@ -48,6 +53,10 @@ export default function Pay() {
 
   useEffect(() => {
     loadPayment();
+    const timer = window.setInterval(() => {
+      loadPayment();
+    }, 5000);
+    return () => clearInterval(timer);
   }, []);
 
   if (!payment.amount) return <p>Cargando...</p>;
