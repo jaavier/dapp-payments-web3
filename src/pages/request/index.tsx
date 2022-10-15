@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMetamask } from "../../metamask";
 import { utils } from "ethers";
-import dapp from "../../metamask/dapp";
 import Badge from "../../components/Badge";
 
-const iface: utils.Interface = new utils.Interface(dapp.abi);
-
-export default function Sent() {
+export default function Request() {
   const { paymentId } = useParams();
-  const { contract } = useMetamask();
-  const [payment, setPayment] = useState<Payment>({});
+  const { user, contract } = useMetamask();
   const navigate = useNavigate();
+  const [payment, setPayment] = useState<Payment>({});
   const loadPayment = async () => {
     try {
       const response = await contract.getPaymentInformation(
@@ -19,12 +16,11 @@ export default function Sent() {
       );
       if (response.length)
         setPayment({
-          description: response[parseInt(paymentId)].description,
-          receiver: response[parseInt(paymentId)].receiver,
-          amount: response[parseInt(paymentId)].amount,
-          amountWithFee: response[parseInt(paymentId)].amountWithFee,
-          status: response[parseInt(paymentId)].status,
-          payer: response[parseInt(paymentId)].payer,
+          description: response.description,
+          receiver: response.receiver,
+          amount: response.amount,
+          amountWithFee: response.amountWithFee,
+          status: response.status,
         });
     } catch (e) {
       console.log("Error loading payment", e);
@@ -45,7 +41,7 @@ export default function Sent() {
   const amountWithFee = utils.formatEther(payment.amountWithFee.toString());
 
   return (
-    <div className="">
+    <div className="h-auto">
       <div className="text-center text-lg mb-4 font-light tracking-wide flex justify-center flex-col items-center gap-1">
         <div className="uppercase">
           Pay Request <span className="underline">#{paymentId}</span>
@@ -58,8 +54,8 @@ export default function Sent() {
           <div className="px-1 py-2">{payment.description}</div>
         </div>
         <div className="font-light tracking-wide my-2">
-          <div className="text-sm font-semibold">Payer</div>
-          <div className="px-1 py-2 text-sm">{payment.payer}</div>
+          <div className="text-sm font-semibold">Receiver</div>
+          <div className="px-1 py-2 text-sm">{payment.receiver}</div>
         </div>
         <div className="font-light tracking-wide items-center my-2">
           <div className="flex gap-5 items-center">
@@ -75,15 +71,9 @@ export default function Sent() {
             <span>{amountWithFee} ETH</span>
           </div>
         </div>
-      </div>
-      <div className="flex justify-center mt-5">
-        <button
-          onClick={() => {
-            navigate(-1);
-          }}
-        >
-          Go back
-        </button>
+        <div className="flex justify-center mt-3 text-xs underline">
+          <Link to="/pay">Go back</Link>
+        </div>
       </div>
     </div>
   );

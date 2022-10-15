@@ -2,24 +2,24 @@ import { utils } from "ethers";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Badge from "../../components/Badge";
-import { ConnectMetamask, DetectMetamask, useMetamask } from "../../metamask";
+import { DetectMetamask, useMetamask } from "../../metamask";
 
 export default function AllSent() {
-  const { user, contract } = useMetamask();
-  const [requests, setRequests] = useState<Payment[]>([
-    {
-      description: "AllToPay",
-      amount: 1,
-      receiver: "0x1",
-      amountWithFee: 1.5,
-      status: false,
-    },
-  ]);
+  const { contract } = useMetamask();
+  const [requests, setRequests] = useState<Payment[]>([]);
 
   const loadList = async () => {
     try {
-      const response = await contract.toGetPaid();
+      const myPayments = await contract.getPaymentIdsRequests();
+      const response = [];
+      for (const paymentId of myPayments) {
+        const obj = await contract.getPaymentInformation(
+          parseInt(paymentId.toString())
+        );
+        response.push({ ...obj, paymentId });
+      }
       setRequests(response);
+      // setRequests(response);
     } catch (error) {
       console.log("Error loading list of payments", error);
     }
@@ -33,8 +33,6 @@ export default function AllSent() {
     }, 1000);
     return () => clearInterval(timer);
   }, []);
-
-  if (!window.ethereum) return <DetectMetamask />;
 
   return (
     <div className="h-96">
@@ -57,7 +55,9 @@ export default function AllSent() {
           <tbody>
             {requests.map((request: Payment, index: number) => (
               <tr className="border-b text-sm" key={index}>
-                <td className="font-extralight py-3">{index}</td>
+                <td className="font-extralight py-3">
+                  {request.paymentId.toString()}
+                </td>
                 <td className="font-extralight py-3">{request.description}</td>
                 <td className="font-extralight py-3">
                   {utils.formatEther(request.amount.toString())} ETH
@@ -72,7 +72,7 @@ export default function AllSent() {
                 <td className="font-extralight text-blue-700">
                   <div className="flex gap-1 justify-center">
                     <div className={`px-2 border-slate-300`}>
-                      <Link to={`/sent/${index}`}>View</Link>
+                      <Link to={`/request/${request.paymentId}`}>View</Link>
                     </div>
                   </div>
                 </td>
@@ -80,6 +80,19 @@ export default function AllSent() {
             ))}
           </tbody>
         </table>
+        {requests.length === 0 && (
+          <div className="py-2 flex justify-center text-sm">
+            <div>
+              Create your first{" "}
+              <Link
+                to="/create"
+                className="text-green-700 underline font-semibold"
+              >
+                payment request
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

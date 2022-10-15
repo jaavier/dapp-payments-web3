@@ -42,6 +42,136 @@ const abi: Record<string, any>[] = [
   },
   {
     inputs: [],
+    name: "getPaymentIds",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getPaymentIdsRequests",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "paymentId",
+        type: "uint256",
+      },
+    ],
+    name: "getPaymentInformation",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "string",
+            name: "description",
+            type: "string",
+          },
+          {
+            internalType: "address payable",
+            name: "receiver",
+            type: "address",
+          },
+          {
+            internalType: "address payable",
+            name: "payer",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "amount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "amountWithFee",
+            type: "uint256",
+          },
+          {
+            internalType: "bool",
+            name: "status",
+            type: "bool",
+          },
+          {
+            internalType: "uint256",
+            name: "paymentId",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct Pay.Payment",
+        name: "",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "myPayments",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "myRequests",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "owner",
     outputs: [
       {
@@ -69,17 +199,12 @@ const abi: Record<string, any>[] = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-      {
         internalType: "uint256",
         name: "",
         type: "uint256",
       },
     ],
-    name: "payments",
+    name: "payment",
     outputs: [
       {
         internalType: "string",
@@ -111,54 +236,10 @@ const abi: Record<string, any>[] = [
         name: "status",
         type: "bool",
       },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
       {
         internalType: "uint256",
-        name: "",
+        name: "paymentId",
         type: "uint256",
-      },
-    ],
-    name: "paymentsSent",
-    outputs: [
-      {
-        internalType: "string",
-        name: "description",
-        type: "string",
-      },
-      {
-        internalType: "address payable",
-        name: "receiver",
-        type: "address",
-      },
-      {
-        internalType: "address payable",
-        name: "payer",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "amountWithFee",
-        type: "uint256",
-      },
-      {
-        internalType: "bool",
-        name: "status",
-        type: "bool",
       },
     ],
     stateMutability: "view",
@@ -166,93 +247,17 @@ const abi: Record<string, any>[] = [
   },
   {
     inputs: [],
-    name: "toGetPaid",
+    name: "paymentsCounter",
     outputs: [
       {
-        components: [
-          {
-            internalType: "string",
-            name: "description",
-            type: "string",
-          },
-          {
-            internalType: "address payable",
-            name: "receiver",
-            type: "address",
-          },
-          {
-            internalType: "address payable",
-            name: "payer",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "amount",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "amountWithFee",
-            type: "uint256",
-          },
-          {
-            internalType: "bool",
-            name: "status",
-            type: "bool",
-          },
-        ],
-        internalType: "struct Pay.Payment[]",
+        internalType: "uint256",
         name: "",
-        type: "tuple[]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "toPay",
-    outputs: [
-      {
-        components: [
-          {
-            internalType: "string",
-            name: "description",
-            type: "string",
-          },
-          {
-            internalType: "address payable",
-            name: "receiver",
-            type: "address",
-          },
-          {
-            internalType: "address payable",
-            name: "payer",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "amount",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "amountWithFee",
-            type: "uint256",
-          },
-          {
-            internalType: "bool",
-            name: "status",
-            type: "bool",
-          },
-        ],
-        internalType: "struct Pay.Payment[]",
-        name: "",
-        type: "tuple[]",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
     type: "function",
   },
 ];
+
 export default abi;
