@@ -3,7 +3,7 @@ import requestAccounts from "../helpers/requestAccounts";
 const ConnectMetamask = () => {
   return (
     <div>
-      <div className="my-2 tracking-wide">
+      <div className="my-2 tracking-wide text-center py-3">
         Your Metamask is not connected to this website
       </div>
       <div

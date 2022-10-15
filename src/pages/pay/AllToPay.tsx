@@ -2,9 +2,11 @@ import { utils } from "ethers";
 import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import Badge from "../../components/Badge";
-import { contract } from "../../metamask";
+import { ConnectMetamask, DetectMetamask, useMetamask } from "../../metamask";
+import payNow from "./payNow";
 
 export default function AllToPay() {
+  const { user, contract } = useMetamask();
   const [requests, setRequests] = useState<Payment[]>([
     {
       description: "AllToPay",
@@ -25,12 +27,15 @@ export default function AllToPay() {
   };
 
   useEffect(() => {
+    if (!window.ethereum) return;
     loadList();
     const timer = window.setInterval(() => {
       loadList();
-    }, 5000);
+    }, 1000);
     return () => clearInterval(timer);
   }, []);
+
+  if (!window.ethereum) return <DetectMetamask />;
 
   return (
     <div>
@@ -57,10 +62,10 @@ export default function AllToPay() {
                 <td className="font-extralight py-3">{index}</td>
                 <td className="font-extralight py-3">{request.description}</td>
                 <td className="font-extralight py-3">
-                  {utils.formatEther(request.amount.toString())}
+                  {utils.formatEther(request.amount.toString())} ETH
                 </td>
                 <td className="font-extralight py-3 font-semibold">
-                  {request.receiver.slice(0, 20)}
+                  {request.receiver.slice(0, 20)}...
                 </td>
                 <td className="font-extralight py-3">Today</td>
                 <td className="font-extralight py-3">
@@ -68,12 +73,27 @@ export default function AllToPay() {
                 </td>
                 <td className="font-extralight text-blue-700">
                   <div className="flex gap-1 justify-center">
-                    <div className="border-r px-2 border-slate-300">
+                    <div
+                      className={`${
+                        !request.status && "border-r"
+                      } px-2 border-slate-300`}
+                    >
                       <Link to={`/pay/${index}`}>View</Link>
                     </div>
-                    <div className="px-1">
-                      <button onClick={() => {}}>Pay</button>
-                    </div>
+                    {!request.status && (
+                      <div className="px-1">
+                        <button
+                          onClick={() => {
+                            payNow({
+                              payment: { ...request, paymentId: index },
+                              address: user.address,
+                            });
+                          }}
+                        >
+                          Pay
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </td>
               </tr>

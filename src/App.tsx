@@ -6,6 +6,8 @@ import Create from "./pages/create";
 import Container from "./components/Container";
 import Pay from "./pages/pay";
 import AllToPay from "./pages/pay/AllToPay";
+import { ConnectMetamask } from "./metamask";
+import { useEffect } from "react";
 
 const Parent = () => {
   return (
