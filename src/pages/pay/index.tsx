@@ -5,6 +5,7 @@ import CustomButton from "../../components/CustomButton";
 import { utils } from "ethers";
 import dapp from "../../metamask/dapp";
 import Badge from "../../components/Badge";
+import payNow from "./payNow";
 
 const iface: utils.Interface = new utils.Interface(dapp.abi);
 
@@ -27,28 +28,12 @@ export default function Pay() {
       console.log("Error loading payment", e);
     }
   };
-  const payNow = async () => {
-    const tx = {
-      from: user.address,
-      to: dapp.address,
-      value: payment.amountWithFee._hex,
-      gas: "99999", //todo cambiar a 21000,
-      chainId: `0x${Number(11155111).toString(16)}`,
-      data: iface.encodeFunctionData("pay", [parseInt(paymentId)]),
-    };
-    await window.ethereum
-      .request({ method: "eth_sendTransaction", params: [tx] })
-      .then(() => {
-        console.log("pago realizado con éxito");
-        alert("PAGO REALIZADO!");
-      });
-  };
 
   useEffect(() => {
     loadPayment();
     const timer = window.setInterval(() => {
       loadPayment();
-    }, 5000);
+    }, 1000);
     return () => clearInterval(timer);
   }, []);
 
@@ -89,18 +74,26 @@ export default function Pay() {
           </div>
         </div>
         {!payment.status && (
-          <div className="mt-4">
+          <div className="my-5 flex flex-col items-center gap-2">
             <CustomButton
               text={`PAY NOW ${amountWithFee} ETH`}
-              onClick={payNow}
+              onClick={() =>
+                payNow({
+                  payment: {
+                    ...payment,
+                    paymentId,
+                  },
+                  address: user.address,
+                })
+              }
             />
-            <span className="text-xs ml-2">
+            <span className="text-xs">
               Balance: {user.balance.toString().slice(0, 10)} ETH
             </span>
           </div>
         )}
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-5">
         <Link to="/pay">Go back</Link>
       </div>
     </div>
