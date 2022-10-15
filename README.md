@@ -1,11 +1,12 @@
 # Dapp: Payments Web3
 
+📣⚠️ This dApp works just in Testnet Sepolia! 📣⚠️
+
+
 This is a project based on [boilerplate-react-metamask](https://github.com/jaavier/boilerplate-react-metamask/), a project that help us to connect React with Metamask
 
 - By default this project will be connected to Sepolia testnet.
 - Feel free to try this dApp and create a request of payment to this wallet 0xd823Ff0182d87666e8e1eDFb4287Fd99FbDaD8C8 for an amount of 0.0012 ETH.
-
-📣⚠️ This dApp works just in Testnet Sepolia! 📣⚠️
 
 ---
 
