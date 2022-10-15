@@ -8,13 +8,13 @@ import useMetamask from "./useMetamask";
 import { MetamaskProvider } from "./context";
 
 export {
-	ConnectMetamask,
-	DetectMetamask,
-	MetamaskProvider,
-	useMetamask,
-	requestAccounts,
-	getBalance,
-	changeNetwork,
-	loadSmartContract,
-	provider,
+  ConnectMetamask,
+  DetectMetamask,
+  MetamaskProvider,
+  useMetamask,
+  requestAccounts,
+  getBalance,
+  changeNetwork,
+  loadSmartContract,
+  provider,
 };
