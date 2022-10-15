@@ -1,5 +1,5 @@
-# Boilerplate-react-metamask
-Boilerplate to connect React app to Web3 using Metamask.
+# Dapp: Payments Web3
+This is a project based on [boilerplate-react-metamask](https://github.com/jaavier/boilerplate-react-metamask/), a project that help us to connect React with Metamask
 
 # How to use?
 Wrap your **App** in `<MetamaskProvider></MetamaskProvider>`
