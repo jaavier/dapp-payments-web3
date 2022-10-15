@@ -92,7 +92,7 @@ export default function Pay() {
             <span>{amountWithFee} ETH</span>
           </div>
         </div>
-        {!status && (
+        {!payment.status && (
           <div className="mt-4">
             <CustomButton
               text={`PAY NOW ${amountWithFee} ETH`}
