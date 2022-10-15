@@ -1,3 +1,3 @@
-const address: string = "0x9D80be634bA32C9F3E1C7cAabdc2f697a1B79B7C";
+const address: string = "0x7746c312d4446Ec1Fb5a7Da79091B51eAAf7A06a";
 
 export default address;

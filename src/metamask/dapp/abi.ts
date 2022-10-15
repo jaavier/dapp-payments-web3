@@ -1,305 +1,239 @@
 const abi: Record<string, any>[] = [
   {
-    inputs: [],
-    stateMutability: "payable",
-    type: "constructor"
-  },
-  {
     inputs: [
       {
-        internalType: "address",
-        name: "employeeWallet",
-        type: "address"
+        internalType: "string",
+        name: "description",
+        type: "string",
+      },
+      {
+        internalType: "address payable",
+        name: "payer",
+        type: "address",
       },
       {
         internalType: "uint256",
-        name: "date",
-        type: "uint256"
-      }
-    ],
-    name: "addNew",
-    outputs: [
-      {
-        internalType: "bytes32",
-        name: "",
-        type: "bytes32"
-      }
-    ],
-    stateMutability: "payable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "employeeWallet",
-        type: "address"
-      }
-    ],
-    name: "banEmployee",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool"
-      }
-    ],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    name: "blacklist",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "employeeWallet",
-        type: "address"
+        name: "amount",
+        type: "uint256",
       },
-      {
-        internalType: "bytes32",
-        name: "hash",
-        type: "bytes32"
-      }
     ],
-    name: "cancel",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool"
-      }
-    ],
+    name: "createRequest",
+    outputs: [],
     stateMutability: "nonpayable",
-    type: "function"
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: "bytes32",
-        name: "hash",
-        type: "bytes32"
-      }
+        internalType: "uint256",
+        name: "paymentId",
+        type: "uint256",
+      },
     ],
-    name: "check",
-    outputs: [
-      {
-        components: [
-          {
-            internalType: "uint256",
-            name: "amount",
-            type: "uint256"
-          },
-          {
-            internalType: "uint256",
-            name: "date",
-            type: "uint256"
-          },
-          {
-            internalType: "bool",
-            name: "completed",
-            type: "bool"
-          },
-          {
-            internalType: "bool",
-            name: "created",
-            type: "bool"
-          },
-          {
-            internalType: "bool",
-            name: "canceled",
-            type: "bool"
-          }
-        ],
-        internalType: "struct Payroll.Payment",
-        name: "",
-        type: "tuple"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "bytes32",
-        name: "hash",
-        type: "bytes32"
-      }
-    ],
-    name: "claim",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool"
-      }
-    ],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    name: "employees",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
+    name: "pay",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
   },
   {
     inputs: [],
-    name: "firstEmployee",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
+    stateMutability: "nonpayable",
+    type: "constructor",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      },
+    inputs: [],
+    name: "fee",
+    outputs: [
       {
         internalType: "uint256",
         name: "",
-        type: "uint256"
-      }
-    ],
-    name: "myTX",
-    outputs: [
-      {
-        internalType: "bytes32",
-        name: "",
-        type: "bytes32"
-      }
+        type: "uint256",
+      },
     ],
     stateMutability: "view",
-    type: "function"
+    type: "function",
   },
   {
     inputs: [],
     name: "owner",
     outputs: [
       {
-        internalType: "address payable",
+        internalType: "address",
         name: "",
-        type: "address"
-      }
+        type: "address",
+      },
     ],
     stateMutability: "view",
-    type: "function"
+    type: "function",
   },
   {
     inputs: [
       {
         internalType: "address",
         name: "",
-        type: "address"
+        type: "address",
       },
       {
-        internalType: "bytes32",
+        internalType: "uint256",
         name: "",
-        type: "bytes32"
-      }
+        type: "uint256",
+      },
     ],
     name: "payments",
     outputs: [
       {
+        internalType: "string",
+        name: "description",
+        type: "string",
+      },
+      {
+        internalType: "address payable",
+        name: "receiver",
+        type: "address",
+      },
+      {
         internalType: "uint256",
         name: "amount",
-        type: "uint256"
+        type: "uint256",
       },
       {
         internalType: "uint256",
-        name: "date",
-        type: "uint256"
+        name: "amountWithFee",
+        type: "uint256",
       },
       {
         internalType: "bool",
-        name: "completed",
-        type: "bool"
+        name: "status",
+        type: "bool",
       },
-      {
-        internalType: "bool",
-        name: "created",
-        type: "bool"
-      },
-      {
-        internalType: "bool",
-        name: "canceled",
-        type: "bool"
-      }
     ],
     stateMutability: "view",
-    type: "function"
+    type: "function",
   },
   {
     inputs: [
       {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
         internalType: "uint256",
         name: "",
-        type: "uint256"
-      }
+        type: "uint256",
+      },
     ],
-    name: "transactions",
+    name: "paymentsSent",
     outputs: [
       {
-        internalType: "bytes32",
-        name: "",
-        type: "bytes32"
-      }
+        internalType: "string",
+        name: "description",
+        type: "string",
+      },
+      {
+        internalType: "address payable",
+        name: "receiver",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountWithFee",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "status",
+        type: "bool",
+      },
     ],
     stateMutability: "view",
-    type: "function"
+    type: "function",
   },
   {
     inputs: [],
-    name: "transactionsList",
+    name: "toGetPaid",
     outputs: [
       {
-        internalType: "bytes32[]",
+        components: [
+          {
+            internalType: "string",
+            name: "description",
+            type: "string",
+          },
+          {
+            internalType: "address payable",
+            name: "receiver",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "amount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "amountWithFee",
+            type: "uint256",
+          },
+          {
+            internalType: "bool",
+            name: "status",
+            type: "bool",
+          },
+        ],
+        internalType: "struct Pay.Payment[]",
         name: "",
-        type: "bytes32[]"
-      }
+        type: "tuple[]",
+      },
     ],
     stateMutability: "view",
-    type: "function"
-  }
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "toPay",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "string",
+            name: "description",
+            type: "string",
+          },
+          {
+            internalType: "address payable",
+            name: "receiver",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "amount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "amountWithFee",
+            type: "uint256",
+          },
+          {
+            internalType: "bool",
+            name: "status",
+            type: "bool",
+          },
+        ],
+        internalType: "struct Pay.Payment[]",
+        name: "",
+        type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
 ];
 
 export default abi;
