@@ -18,7 +18,7 @@ export default function Create() {
   return (
     <div>
       <div className="text-center text-lg mb-4 font-light uppercase tracking-wide">
-        Create Request {user.balance}
+        Create Request
       </div>
       <div>
         <form onSubmit={onSubmit}>
