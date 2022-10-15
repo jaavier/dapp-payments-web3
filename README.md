@@ -15,11 +15,14 @@ I'll be attent :)
 
 <img width="1208" alt="image" src="https://user-images.githubusercontent.com/990085/195972471-75a8b0dd-4a5f-488c-9710-cc75efca9267.png">
 
+<img width="1208" alt="image" src="https://user-images.githubusercontent.com/990085/195977003-04fa125f-5cb1-44c6-b2e3-62f088fcfe1f.png">
+
+
 # Create Request
 
 Are you running this project? Create your first payment request! **[Create Request](https://localhost:3000/create)**
 
-<img width="1440" alt="image" src="https://user-images.githubusercontent.com/990085/195962374-53fe6025-29da-4a3c-bd4e-95d263df564a.png">
+<img width="1208" alt="image" src="https://user-images.githubusercontent.com/990085/195977023-68ff43b2-8ca6-4ae3-a7da-dd72209efa34.png">
 
 # View all requests
 
