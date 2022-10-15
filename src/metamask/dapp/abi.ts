@@ -1,5 +1,10 @@
 const abi: Record<string, any>[] = [
   {
+    inputs: [],
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  {
     inputs: [
       {
         internalType: "string",
@@ -21,24 +26,6 @@ const abi: Record<string, any>[] = [
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "paymentId",
-        type: "uint256",
-      },
-    ],
-    name: "pay",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    stateMutability: "nonpayable",
-    type: "constructor",
   },
   {
     inputs: [],
@@ -64,6 +51,19 @@ const abi: Record<string, any>[] = [
       },
     ],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "paymentId",
+        type: "uint256",
+      },
+    ],
+    name: "pay",
+    outputs: [],
+    stateMutability: "payable",
     type: "function",
   },
   {
@@ -235,5 +235,4 @@ const abi: Record<string, any>[] = [
     type: "function",
   },
 ];
-
 export default abi;

@@ -1,12 +1,19 @@
 import { MetamaskProvider } from "./metamask/context";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/home";
-import Received from "./pages/received";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Sent from "./pages/sent";
 import Error from "./pages/error";
 import Create from "./pages/create";
 import Container from "./components/Container";
 import Pay from "./pages/pay";
+import AllToPay from "./pages/pay/AllToPay";
+
+const Parent = () => {
+  return (
+    <div>
+      <Outlet />
+    </div>
+  );
+};
 
 export default function App() {
   return (
@@ -14,14 +21,13 @@ export default function App() {
       <Container>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home />}>
-              <Route index element={<Home />} />
-            </Route>
-            <Route path="received" element={<Received />} />
-            <Route path="sent" element={<Sent />} />
-            <Route path="create" element={<Create />} />
-            <Route path="pay" element={<Pay />}>
-              <Route path=":paymentId" element={<Pay />} />
+            <Route path="/" element={<Parent />}>
+              <Route path="sent" element={<Sent />} />
+              <Route path="create" element={<Create />} />
+              <Route path="pay" element={<Parent />}>
+                <Route index element={<AllToPay />} />
+                <Route path=":paymentId" element={<Pay />} />
+              </Route>
             </Route>
             <Route path="*" element={<Error />} />
           </Routes>
