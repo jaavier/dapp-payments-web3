@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Dapp Ethereum to allow people send and manage requests of payment",
   "lint-staged": {
-    "*": "prettier --loglevel silent --write src/"
+    "*": "prettier --ignore-unknown --write src/"
   },
   "keywords": [
     "web3",
