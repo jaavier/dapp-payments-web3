@@ -1,15 +1,4 @@
 import { useEffect, useState } from "react";
-<<<<<<< Updated upstream
-import { useMetamask } from "../../metamask";
-
-export default function Sent() {
-  const { contract } = useMetamask();
-  const [payments, setPayments] = useState<any[]>([]);
-  const loadToGetPaid = async () => {
-    try {
-      const response = await contract.toGetPaid();
-      setPayments(response);
-=======
 import { useNavigate, useParams } from "react-router-dom";
 import { useMetamask } from "../../metamask";
 import { utils } from "ethers";
@@ -39,19 +28,12 @@ export default function Sent() {
           status: response[parseInt(paymentId)].status,
           payer: response[parseInt(paymentId)].payer,
         });
->>>>>>> Stashed changes
     } catch (e) {
       console.log("Error loading payment", e);
     }
   };
 
   useEffect(() => {
-<<<<<<< Updated upstream
-    loadToGetPaid();
-  }, []);
-
-  return <div>Requests sent {payments.length}</div>;
-=======
     loadPayment();
     const timer = window.setInterval(() => {
       loadPayment();
@@ -107,5 +89,4 @@ export default function Sent() {
       </div>
     </div>
   );
->>>>>>> Stashed changes
 }

@@ -1,16 +1,7 @@
-import { useEffect } from "react";
-import { useMetamask, ConnectMetamask, loadSmartContract } from "../metamask";
-import dapp from "../metamask/dapp";
+import { useMetamask, ConnectMetamask } from "../metamask";
 
 export default function HelloMetamask() {
-  const { user, setContract } = useMetamask();
-  const setSmartContract = () => {
-    setContract(loadSmartContract(dapp.address, dapp.abi));
-  };
-
-  useEffect(() => {
-    setSmartContract();
-  }, []);
+  const { user } = useMetamask();
 
   return (
     <div className="flex flex-col items-center bg-slate-100 h-screen justify-center">
