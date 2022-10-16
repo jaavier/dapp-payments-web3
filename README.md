@@ -24,11 +24,11 @@ Are you running this project? Create your first payment request! **[Create Reque
 
 # View your requests
 
-**Received**
-<img width="1171" alt="image" src="https://user-images.githubusercontent.com/990085/196012955-455e459f-38cf-471e-b9dd-5743bd75d725.png">
-
 **Sent**
 <img width="1171" alt="image" src="https://user-images.githubusercontent.com/990085/196012991-d4e09d15-b0b5-4dc9-ac43-84eba08942c9.png">
+
+**Received**
+<img width="1171" alt="image" src="https://user-images.githubusercontent.com/990085/196012955-455e459f-38cf-471e-b9dd-5743bd75d725.png">
 
 # View and Pay Request
 
