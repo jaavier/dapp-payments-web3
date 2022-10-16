@@ -16,25 +16,28 @@ I'll be attent :)
 
 <img width="1208" alt="image" src="https://user-images.githubusercontent.com/990085/195972471-75a8b0dd-4a5f-488c-9710-cc75efca9267.png">
 
-<img width="1208" alt="image" src="https://user-images.githubusercontent.com/990085/195977003-04fa125f-5cb1-44c6-b2e3-62f088fcfe1f.png">
+<img width="1171" alt="image" src="https://user-images.githubusercontent.com/990085/196012879-d4ee2384-6221-4175-b1e3-0ec09491949e.png">
 
 
 # Create Request
 
 Are you running this project? Create your first payment request! **[Create Request](https://localhost:3000/create)**
 
-<img width="1208" alt="image" src="https://user-images.githubusercontent.com/990085/195977023-68ff43b2-8ca6-4ae3-a7da-dd72209efa34.png">
+<img width="1171" alt="image" src="https://user-images.githubusercontent.com/990085/196012930-cbffc373-4a3e-4e60-8e10-54ce48be941c.png">
 
-# View all requests
+# View your requests
 
-<img width="1208" alt="image" src="https://user-images.githubusercontent.com/990085/195972251-e1726830-415f-4695-8117-a2ab66cee45e.png">
+**Received**
+<img width="1171" alt="image" src="https://user-images.githubusercontent.com/990085/196012955-455e459f-38cf-471e-b9dd-5743bd75d725.png">
+
+**Sent**
+<img width="1171" alt="image" src="https://user-images.githubusercontent.com/990085/196012991-d4e09d15-b0b5-4dc9-ac43-84eba08942c9.png">
 
 # View and Pay Request
 
-<img width="1208" alt="image" src="https://user-images.githubusercontent.com/990085/195972220-942d08c1-1444-49ac-b0fb-94a684c644ee.png">
+<img width="1171" alt="image" src="https://user-images.githubusercontent.com/990085/196012996-81f6f6fe-55dd-433d-b9a2-ffd1f10e3d42.png">
 
-# Under construction
+# Pending
 
-1. Route **/received** to see with detail requests of payment received.
-2. Route **/sent** to see payment requests sent
-3. Navbar or similar to navigate between /sent, /pay and /pay/:paymentId
+- Mobile version
+- Add posibility to send payment requests using ERC-20 tokens instead of ETH
