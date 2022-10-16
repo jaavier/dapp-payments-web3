@@ -7,7 +7,7 @@ const menu: Record<string, any>[] = [
   },
   {
     name: "sent",
-    label: "Requests",
+    label: "Sent",
   },
   {
     name: "pay",
@@ -24,12 +24,12 @@ export default function Navbar() {
 
   return (
     <div>
-      <div className="flex text-xs uppercase rounded-t-md border-t border-l border-r border-slate-300 shadow-lg">
+      <div className="flex text-xs uppercase rounded-t-md border-t border-l border-r border-slate-300 shadow-lg w-full text-center">
         {menu.map(({ name, label }: any, index: number) => (
           <Link
             key={index}
             to={`/${name}`}
-            className={`flex-1 p-4 border-r border-l ${
+            className={`p-4 border-r border-l w-24 ${
               location.pathname === `/${name}`
                 ? "bg-gradient-to-bl from-blue-50 to-blue-300 text-blue-700"
                 : ""
