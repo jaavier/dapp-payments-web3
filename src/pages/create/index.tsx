@@ -54,7 +54,7 @@ export default function Create() {
   return (
     <div className="h-96">
       <div className="text-center text-lg mb-4 font-light uppercase tracking-widest">
-        Create Request {form.amount}
+        Create Request
       </div>
       <div>
         <div className="grid grid-cols-2 items-center justify-center gap-3">
