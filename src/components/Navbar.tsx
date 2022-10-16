@@ -24,15 +24,15 @@ export default function Navbar() {
 
   return (
     <div>
-      <div className="flex gap-12 text-xs uppercase">
+      <div className="flex text-xs uppercase rounded-t-md border-t border-l border-r border-slate-300 shadow-lg">
         {menu.map(({ name, label }: any, index: number) => (
           <Link
             key={index}
             to={`/${name}`}
-            className={`flex-1 p-4 rounded-t-md border-t border-slate-400 ${
+            className={`flex-1 p-4 border-r border-l ${
               location.pathname === `/${name}`
-                ? "bg-gradient-to-bl from-green-50 to-green-300"
-                : "bg-slate-50"
+                ? "bg-gradient-to-bl from-blue-50 to-blue-300 text-blue-700"
+                : ""
             }`}
           >
             {label}
