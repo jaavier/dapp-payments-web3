@@ -16,9 +16,6 @@ I'll be attent :)
 
 <img width="1208" alt="image" src="https://user-images.githubusercontent.com/990085/195972471-75a8b0dd-4a5f-488c-9710-cc75efca9267.png">
 
-<img width="1171" alt="image" src="https://user-images.githubusercontent.com/990085/196012879-d4ee2384-6221-4175-b1e3-0ec09491949e.png">
-
-
 # Create Request
 
 Are you running this project? Create your first payment request! **[Create Request](https://localhost:3000/create)**
