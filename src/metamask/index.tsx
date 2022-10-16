@@ -6,6 +6,7 @@ import getBalance from "./helpers/getBalance";
 import changeNetwork from "./helpers/changeNetwork";
 import useMetamask from "./useMetamask";
 import { MetamaskProvider } from "./context";
+import dapp from "./dapp";
 
 export {
   ConnectMetamask,
@@ -16,4 +17,5 @@ export {
   getBalance,
   changeNetwork,
   setupSmartContract,
+  dapp,
 };

@@ -2,7 +2,7 @@ import { utils } from "ethers";
 import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import Badge from "../../components/Badge";
-import { ConnectMetamask, DetectMetamask, useMetamask } from "../../metamask";
+import { useMetamask } from "../../metamask";
 import payNow from "./payNow";
 
 export default function AllToPay() {
@@ -11,8 +11,17 @@ export default function AllToPay() {
 
   const loadList = async () => {
     try {
-      const response = await contract.toPay();
+      const myPayments = await contract.getPaymentIds();
+      const response = [];
+      for (const paymentId of myPayments) {
+        const obj = await contract.getPaymentInformation(
+          parseInt(paymentId.toString())
+        );
+        response.push({ ...obj, paymentId });
+      }
       setRequests(response);
+
+      // setRequests(response);
     } catch (error) {
       console.log("Error loading list of payments", error);
     }
@@ -26,8 +35,6 @@ export default function AllToPay() {
     }, 1000);
     return () => clearInterval(timer);
   }, []);
-
-  if (!window.ethereum) return <DetectMetamask />;
 
   return (
     <div className="h-96">
@@ -51,7 +58,9 @@ export default function AllToPay() {
           <tbody>
             {requests.map((request: Payment, index: number) => (
               <tr className="border-b text-sm" key={index}>
-                <td className="font-extralight py-3">{index}</td>
+                <td className="font-extralight py-3">
+                  {request.paymentId.toString()}
+                </td>
                 <td className="font-extralight py-3">{request.description}</td>
                 <td className="font-extralight py-3">
                   {utils.formatEther(request.amount.toString())} ETH
@@ -70,14 +79,17 @@ export default function AllToPay() {
                         !request.status && "border-r"
                       } px-2 border-slate-300`}
                     >
-                      <Link to={`/pay/${index}`}>View</Link>
+                      <Link to={`/pay/${request.paymentId}`}>View</Link>
                     </div>
                     {!request.status && (
                       <div className="px-1">
                         <button
                           onClick={() => {
                             payNow({
-                              payment: { ...request, paymentId: index },
+                              payment: {
+                                ...request,
+                                paymentId: parseInt(request.paymentId),
+                              },
                               address: user.address,
                             });
                           }}

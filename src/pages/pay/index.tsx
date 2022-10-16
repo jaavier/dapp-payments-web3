@@ -3,28 +3,26 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMetamask } from "../../metamask";
 import CustomButton from "../../components/CustomButton";
 import { utils } from "ethers";
-import dapp from "../../metamask/dapp";
 import Badge from "../../components/Badge";
 import payNow from "./payNow";
-
-const iface: utils.Interface = new utils.Interface(dapp.abi);
 
 export default function Pay() {
   const { paymentId } = useParams();
   const { user, contract } = useMetamask();
   const navigate = useNavigate();
   const [payment, setPayment] = useState<Payment>({});
-  console.log("🚀 ~ file: index.tsx ~ line 16 ~ Pay ~ payment", payment);
   const loadPayment = async () => {
     try {
-      const response = await contract.toPay();
+      const response = await contract.getPaymentInformation(
+        parseInt(paymentId)
+      );
       if (response.length)
         setPayment({
-          description: response[parseInt(paymentId)].description,
-          receiver: response[parseInt(paymentId)].receiver,
-          amount: response[parseInt(paymentId)].amount,
-          amountWithFee: response[parseInt(paymentId)].amountWithFee,
-          status: response[parseInt(paymentId)].status,
+          description: response.description,
+          receiver: response.receiver,
+          amount: response.amount,
+          amountWithFee: response.amountWithFee,
+          status: response.status,
         });
     } catch (e) {
       console.log("Error loading payment", e);
@@ -45,7 +43,7 @@ export default function Pay() {
   const amountWithFee = utils.formatEther(payment.amountWithFee.toString());
 
   return (
-    <div className="h-96">
+    <div className="h-auto">
       <div className="text-center text-lg mb-4 font-light tracking-wide flex justify-center flex-col items-center gap-1">
         <div className="uppercase">
           Pay Request <span className="underline">#{paymentId}</span>
@@ -76,7 +74,7 @@ export default function Pay() {
           </div>
         </div>
         {!payment.status && (
-          <div className="my-5 flex flex-col items-center gap-2">
+          <div className="flex flex-col items-center gap-2">
             <CustomButton
               text={`PAY NOW ${amountWithFee} ETH`}
               onClick={async () => {
@@ -95,9 +93,9 @@ export default function Pay() {
             </span>
           </div>
         )}
-      </div>
-      <div className="flex justify-center mt-5">
-        <Link to="/pay">Go back</Link>
+        <div className="flex justify-center mt-3 text-xs underline">
+          <Link to="/pay">Go back</Link>
+        </div>
       </div>
     </div>
   );

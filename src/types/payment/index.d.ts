@@ -5,4 +5,5 @@ declare type Payment = {
   amount?: number;
   amountWithFee?: any;
   status?: boolean;
+  paymentId?: string;
 };

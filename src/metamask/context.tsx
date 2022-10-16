@@ -55,7 +55,7 @@ const MetamaskProvider = ({ children }: any) => {
   useEffect(() => {
     const timer = window.setInterval(() => {
       getUserInfo();
-    }, 1500);
+    }, 1000);
     return () => clearInterval(timer);
   }, []);
 
